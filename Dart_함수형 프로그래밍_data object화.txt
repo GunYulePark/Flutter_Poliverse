@@ -1,0 +1,75 @@
+void main(){
+  List<Map<String, String>> people = [
+    {
+      'name':'로제',
+      'group' : '블랙핑크',
+    },
+    {
+      'name':'지수',
+      'group' : '블랙핑크',
+    },
+    {
+      'name':'RM',
+      'group' : 'BTS',
+    },
+    {
+      'name':'지민',
+      'group' : 'BTS',
+    },
+  ];
+  
+  print(people);
+  
+  final parsedPeople = people.map(
+    (x) => Person(
+      // !: 값이 존재한다는 의미
+      name: x['name']!,
+      group: x['group']!,
+    ),
+  ).toList();
+  
+  print(parsedPeople);
+  
+  
+  for(Person person in parsedPeople){
+    print(person.name);
+    print(person.group);
+  }
+  
+  final bts = parsedPeople.where(
+  (x) => x.group == 'BTS',
+  );
+  print(bts);
+  
+  // 한번에 Object화, 그리고 where로 screening 까지하고, 이름 글자 수 합 합치기
+  final result = people.map(
+    (x) => Person(
+      name: x['name']!,
+      group: x['group']!,
+    ),
+  )
+  .where((x) => x.group == 'BTS')
+  .fold<int>(
+    0,
+    (prev, next) => prev + next.name.length,
+  );
+  print(result);
+}
+
+
+// 데이터를 가져오면 class로 변환해서 사용하는 게 좋다.
+// 그래야 구조화하기 좋다. (null 처리, 변수 변경 control 등.) 
+class Person {
+  final String name;
+  final String group;
+  
+  Person({
+    required this.name,
+    required this.group,
+  });
+  
+  @override
+  String toString(){
+    return 'Person(name: $name, group: $group)';
+  }
+}

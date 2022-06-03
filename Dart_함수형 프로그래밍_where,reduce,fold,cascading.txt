@@ -1,0 +1,105 @@
+void main(){
+  // where 함수
+  List<Map<String, String>> people = [
+    {
+      'name':'로제',
+      'group' : '블랙핑크',
+    },
+    {
+      'name':'지수',
+      'group' : '블랙핑크',
+    },
+    {
+      'name':'RM',
+      'group' : 'BTS',
+    },
+    {
+      'name':'지민',
+      'group' : 'BTS',
+    },
+  ];
+  
+  print(people);
+  
+  // where 함수 : true인 곳만 return 된다
+  // 필터링 하는 역할 
+  //*** 중요!
+  final blackPink = people.where((x) => x['group'] == '블랙핑크').toList();
+  print(blackPink);
+  
+  
+  // reduce
+  // loop 문으로 활용
+  // reduce의 return 값고 원래 원본의 type이 같아야 한다.
+  List<int> numbers = [
+    1,
+    3,
+    5,
+    7,
+  ];
+  // 왜 그런지 모르겠는데 오류나온다.
+  final result_1 = numbers.reduce((prev, next){
+    print('------------');
+    print('previous : $prev');
+    print('next : $next');
+    print('total : ${prev + next}');
+    
+    return prev + next;
+  });
+  
+  final result_2 = numbers.reduce((prev, next) => prev + next);
+  print(result_2);
+  
+  List<String> words = [
+    '안녕하세요 ',
+    '저는 ',
+    '박건률입니다.',
+  ];
+  
+  final sentence = words.reduce((prev, next) => prev + next);
+  print(sentence);
+
+  // reduce의 return 값고 원래 원본의 type이 같아야 한다.
+// error
+//   words.reduce((prev, next) => prev.length + next.length);
+
+  
+  //fold : reduce의 단점(바로 위) 해결 가능
+  // 원본과 fold의 결과값의 type이 다를 수 있다.
+  
+  // 어떤 값이 return 될 지 정해줄 수 있다. ex.<int>
+  // 첫번 째 prev도 넣어줄 수 있다. ex.1
+  final sum = numbers.fold<int>(1, (prev, next) => prev + next);
+  
+  print(sum);
+  
+  final sentence_length = words.fold<int>(100, (prev, next) => prev + next.length);
+  // 맨 처음 prev = 100이므로 prev.length 대신 prev로 써준다.
+  print (sentence_length);
+  
+  
+ 
+  // cascading operator
+  // 리스트 안에 값을 풀어놓는 역할
+  // 방법 : [...Listname]
+  List<int> even =[
+    2,
+    4,
+    6,
+    8,
+  ];
+  
+  List<int> odd = [
+    1,
+    3,
+    5,
+    7,
+  ];
+  
+  print([...even, ...odd]);
+  print(even);
+  print([...even]);
+  print(even == [...even] );
+  
+  
+}

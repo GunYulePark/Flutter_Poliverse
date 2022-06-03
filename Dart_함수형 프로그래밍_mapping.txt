@@ -1,0 +1,64 @@
+void main(){
+  List<String> blackPink = ['로제', '지수', '리사', '로제'];
+  
+  print(blackPink);
+  print(blackPink.asMap());
+  print(blackPink.toSet());
+  
+  Map blackPinkMap = blackPink.asMap();
+  
+  print(blackPinkMap.keys.toList());
+  print(blackPinkMap.values.toList());
+  
+  Set blackPinkSet = Set.from(blackPink);
+  
+  print(blackPinkSet.toList());
+  
+  // map 활용
+  final newBlackPink = blackPink.map((x){
+    return '블랙핑크 $x';
+  });
+  print(newBlackPink.toList());
+  
+  // arrow 함수. 위랑 똑같이 작용
+  final newBlackPink2 = blackPink.map((x) => '블랙핑크 $x'); 
+  print(newBlackPink2.toList());
+  
+  // 1.jpg, 3.jpg, 5.jpg로 변환
+  String number = '135';
+  final parsed = number.split('').map((x) => '$x.jpg').toList();
+  
+  print(parsed);
+  
+    // Map mapping
+  Map<String, String> harryPotter = {
+    'Harry' : '해리포터',
+    'Ron' : '론 위즐리',
+  };
+  
+  final result = harryPotter.map(
+  (key,value) => MapEntry(
+    'Harry Potter Character-$key',
+    '해리포터 캐릭터-$value',
+    ),
+  );
+  print(harryPotter);
+  print(result);
+  
+  final keys = harryPotter.keys.map((x) => 'HPC-$x').toList();
+  final values = harryPotter.values.map((x) => 'HPC-$x').toList();
+  print(keys);
+  print(values);
+  
+  
+  // Set mapping 
+  Set blackPinkSet = {
+    '로제',
+    '지수',
+  };
+  
+  final newSet = blackPinkSet.map((x) => '블랙핑크 $x').toSet();
+  print(newSet);
+  
+  
+}

@@ -1,0 +1,114 @@
+void main(){
+  Idol blackPink = const Idol(
+    '블랙핑크', 
+    ['지수', '제니', '리사', '로제']);
+  
+//   const는 값을 runtime이 아닌 buildtime(compile timing)에 알아야 한다.
+  
+  print(blackPink.members);
+  blackPink.sayHello();
+  
+//   named constructor 활용
+  Idol bts = Idol.fromList(
+    [
+      ['정국', '제이홉', '지민'],
+      'BTS'
+    ]
+  );
+  
+  print(bts.members);
+  bts.sayHello();
+  bts.introduce();
+  
+  //getter setter 실행 부분
+  Idol_1 blackPink_1 = Idol_1(
+    '블랙핑크', 
+    ['지수', '제니', '리사', '로제']);  
+  
+  print(blackPink_1.firstMember);
+  blackPink_1.firstMember = "아아";
+  print(blackPink_1.firstMember);
+}
+
+// constructor(생성자)
+
+class Idol{
+  // immutable 프로그램. 
+// 한번 값 설정하고 나면 밖에서 수정할 수 없게.
+// 마치 java에서 class 파일처럼
+
+  final String name;
+  final List<String> members;
+  
+  
+//   Constructor
+
+//   Idol(String name, List<String> members)
+//     : this.name = name,
+//       this.members = members;
+ 
+//   위에 거 간략하게
+  const Idol(this.name, this.members);
+  
+//   named constructor
+  Idol.fromList(List values)
+    : this.members = values[0],
+      this.name = values[1];
+  
+  void sayHello(){
+    print("안녕하세요, ${this.name}입니다.");
+  }
+  
+  void introduce(){
+    print("저희 멤버는 ${this.members}입니다.");
+  }
+}
+
+
+// getter / setter 
+// 데이터를 가져올 때 / 데이터를 설정할 때
+// 이 땐 final, const쓰면 안된다.
+
+class Idol_1{
+  // immutable 프로그램. 
+// 한번 값 설정하고 나면 밖에서 수정할 수 없게.
+// 마치 java에서 class 파일처럼
+
+  String name;
+  List<String> members;
+  
+//   Constructor
+
+  Idol_1(this.name, this.members);
+  
+//   named constructor
+  Idol_1.fromList(List values)
+    : this.members = values[0],
+      this.name = values[1];
+  
+  void sayHello(){
+    print("안녕하세요, ${this.name}입니다.");
+  }
+  
+  void introduce(){
+    print("저희 멤버는 ${this.members}입니다.");
+  }
+  
+//   getter - 괄호() 없이
+  String get firstMember{
+    return this.members[0];
+  }
+  
+//   setter - parameter 하나만 사용 가능
+  set firstMember(String name){
+    this.members[0] = name;
+    
+  }
+}
+
+
+// private 값 : 앞에 ' _'를 붙여준다. ex) _Idol, _sayHello()
+// 같은 파일에서만 사용할 수 있다.
+
+
+

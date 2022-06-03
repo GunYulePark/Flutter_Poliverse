@@ -1,0 +1,81 @@
+void main(){
+  print('-------idol-------');
+  Idol apink = Idol(name: '에이핑크', membersCount: 5);
+  apink.sayName();
+  
+  print('-------bts-------');
+  BoyGroup bts = BoyGroup('BTS', 7); 
+  // 부모의 기능 그대로 쓸 수 있다.
+  bts.sayName();
+  bts.sayMale();
+  
+  print('--------Girl Group---------');
+  GirlGroup redVelvet = GirlGroup('Red Velvet', 7);
+  redVelvet.sayName();
+  redVelvet.sayFemale();
+  
+  // 자식은 부모의 타입도 갖고 있다.
+  print('--------Type Comparison---------');
+  print(bts is Idol);
+  print(bts is BoyGroup);
+  print(bts is GirlGroup);
+  
+  
+}
+
+// 상속 - interitance
+// 상속을 받으면 부모 클래스의 모든 속성을
+// 자식 클래스가 부여받는다.
+// 자식 클래스의 속성은 부모클래스에 넘어가지 않는다.
+
+class Idol{
+  // 이름
+  String name;
+  // 멤버 숫자
+  int membersCount;
+
+ Idol({
+   required this.name,
+   required this.membersCount,
+ });
+  
+  void sayName(){
+    print('저는 ${this.name}입니다.');
+  }
+  
+  void sayMembersCount(){
+    print(' ${this.name}은 ${this.membersCount}명의 멤버가 있습니다.');
+  }
+}
+
+
+class BoyGroup extends Idol{
+  // Idol class의 constructor 지칭
+  BoyGroup(
+    String name,
+    int membersCount,
+  ): super(
+    name: name,
+    membersCount: membersCount,
+  );
+ // BoyGroup에서 받은 parameter를 바로 Idol에 named param으로 넘겨준다.
+//  이를 위해 this 대신에 super 써준다.
+  
+  void sayMale(){
+    print("저는 남자아이돌입니다.");
+  }
+}
+
+class GirlGroup extends Idol{
+  GirlGroup(
+    String name,
+    int membersCount,
+  ): super(
+    name: name,
+    membersCount: membersCount,
+  );
+  
+  void sayFemale(){
+    print("저는 여자아이돌입니다.");
+  }
+}

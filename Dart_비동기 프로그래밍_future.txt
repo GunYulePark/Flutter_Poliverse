@@ -1,0 +1,39 @@
+void main() async {
+  
+  
+  // Future - 미래
+  // 미래에 받아올 값
+  Future<String> name = Future.value('코드팩토리');
+  Future<int> number = Future.value(1);
+  
+  final result1 = await addNumbers(1, 1);
+  final result2 = await addNumbers(2, 2);
+  
+  print('result1= ${result1}');
+  print('result2 = ${result2}');
+  print('result1 + result2 = ${result1 + result2}');
+  // delayed함수 - 2개의 param
+  // 1번 파라미터 - 지연할 기간(얼마나 지연할건지) Duration
+  // 2번 파라미터 - 지연 시간이 지난 후 실행할 함수.
+}
+
+// 1 + 1 = 2
+// 2 + 2 = 4
+
+Future<int> addNumbers(int number1, int number2) async{
+  print('계산 시작: $number1 + $number2');
+  
+  // 서버 시뮬레이션
+  await Future.delayed(Duration(seconds: 2), (){
+    print('계산 완료: $number1 + $number2 = ${number1 + number2}');
+  });
+  
+  print('함수 완료: $number1 + $number2');
+  
+  return number1 + number2;
+  
+  // await 쓰기 위해선 함수() async {} 꼭 써줘야 한다.
+  // 그리고 await는 Future 함수에만 쓸 수 있다.
+  // await를 써서 그 밑에 async 코드를 기다리게 할 수 있다.
+  // 그리고 cpu 비어서 main 쪽에 다른 곳 쓸 수 있다. 
+}

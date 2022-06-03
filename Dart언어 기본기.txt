@@ -1,0 +1,270 @@
+void main() {
+  print("hello world");
+  
+  //variable
+  var name = "코드팩토리";
+  print(name);
+  
+  name = 'flutter';
+  print(name);
+  
+//   var name = 'flutter2';
+  // 다시 똑같은 이름의 변수 선언하는 것 불가
+
+  // type : int, double, Boolean(true, false), String
+  
+  // var로 타입을 하면 자체적으로 type 인지해서 한다.
+  // var은 복잡한 타입일 때만 사용한다.
+  
+  String name2 = '사랑해요';
+  print(name + name2);
+  print('저는 ${name}를 사랑해요');
+
+  
+// # dynamic type
+//   dynamic은 var과 비슷하게 어떤 type이든 받아주지만, dynamic만 type으로 새로운 값을 받을 수 있다. 
+  dynamic name3 = '코드팩토리';
+  print(name3.runtimeType);
+//   name=1; // name은 var이라 String에서 int로 값 변경 불가
+  name3=1;
+  
+  
+//   # nullable / non-nullable ***flutter 2.0 null safety 관련***
+//   ? > nullable로 바꾸기
+//   ! > 현재 이 값은 null이 아니다
+  
+  String? name4 = '코드팩토리';
+  print(name4);
+  name4 = null;
+  print(name4);
+  
+  String name5 = '코드팩토리';
+  print(name5!);
+  
+  
+//   # final / const ***굉장히 중요***
+//   공통점 : 둘 다 변경 불가. type도 생략 가능
+  
+  final name6 = '코드팩토리';
+  const name7 = '코드팩토리';
+  
+//   DateTime.now() : 코드가 실행되는 순간의 값 가져온다.
+  DateTime now = DateTime.now();
+  print(now);
+  
+//   차이점
+//   final은 build time에 값 몰라도 된다.
+//   const는 build time에 값 알아야 한다.
+  final DateTime now1 = DateTime.now();
+//   const DateTime now2 = DateTime.now(); //error
+  
+  
+//   # Operators
+//   ++, --, +=, -= 다 된다.
+  
+  double? number = 4.0;
+  number = null;
+  number ??= 3.0; // number가 null 이면 3.0으로 바꿔라
+  print(number);
+
+  
+//   # 리스트
+  List<String> blackPink = ['제니', '지수', '로제', '리사'];
+  print(blackPink);
+  print(blackPink.length);
+  blackPink.add('소연');
+  blackPink.remove('제니');
+  print(blackPink);
+  
+  print(blackPink.indexOf('소연'));
+  
+  
+//   # Map
+//   key / value
+  
+  Map<String, String> dictionary ={
+    'Harry Potter' : '해리포터',
+    'RonWeasley' : '론 위즐리'
+  };
+ print(dictionary);
+//   추가 방법 2개
+ dictionary.addAll({
+   'Herminone Granger' : '헤르미온느 그레인저'
+ });   
+  
+ dictionary['Hulk'] = '헐크';
+ print(dictionary);
+//  key로 value 값 가져오기
+ print(dictionary['Harry Potter']);
+  
+//  삭제
+ dictionary.remove('Harry Potter');
+  
+ print(dictionary.keys);
+ print(dictionary.values);
+  
+//  set >> List와 함수 비슷
+  final Set<String> names = {
+    'A',
+    'B',
+    'A',
+  };
+  print(names);
+  names.add('C');
+  names.remove('C');
+  
+  print(names.contains('A'));
+  
+  
+//   # if 문
+  int num2 = 4;
+  if(num2%3==0){
+    print('나머지가 0입니다.');
+  }else if(num2%3==1){
+    print('나머지가 1입니다.');
+  }else if(num2%3==2){
+    print('나머지가 2입니다.');
+  }
+  
+  switch(num2 % 3){
+    case 0:
+      print('나머지가 0입니다.');
+      break;
+      
+    case 1:
+      print('나머지가 1입니다.');
+      break;
+      
+    default:
+      print('나머지가 2입니다.');
+      break;
+  }
+  
+  
+//   # loop
+  for(int i = 0; i<3; i++){
+    print(i);
+  }
+  
+  int total = 0;
+  List<int> numbers1 = [1, 2, 3, 4];
+  for(int i = 0; i<numbers1.length; i++){
+    total+=numbers1[i];
+  }
+  
+  print(total);
+  
+//   shortcut
+  total = 0;
+  for(int number in numbers1){
+    total+=number;
+  }
+  print(total);
+  
+//   while
+  total=0;
+  while(total<10){
+    total+=1;
+    if(total == 5){
+      break;
+    }
+  }
+  print(total);
+  
+//   continue
+  for(int i = 0; i<5; i++){
+    if(i == 2){
+      continue;
+    }
+    print(i);
+  }
+  
+  
+//   # enum : void main{} 바깥에 정의
+//   상태 나타내기
+//   정확히 이 3개의 값만 존재한다는 것. 오타 방지
+  Status status = Status.pending;
+  if(status == Status.approved){
+    print('승인입니다.');
+  } else if(status == Status. pending){
+    print('대기입니다.');
+  } else if(status == Status.rejected){
+    print('거절입니다.');
+  }
+  
+  addNumbers(10, 30, 40);
+  addNumbers(10);
+  
+  int returned_value = addNumbers_named(y: 20, x: 10);
+  print(returned_value);
+
+  
+  //   Typedef
+  Operation operation = add;
+  int result = operation(10, 20);
+  print(result);
+  
+//   사실 위에처럼 하지 않고 밑에처럼 한다.
+  int result1 = calculate(20, 10, subtract);
+  print(result1);
+}
+
+enum Status{
+    approved, // 승인
+    pending, // 대기
+    rejected, // 거절
+  }
+
+addNumbers(int x, [int y = 20, int z = 30]){
+  int sum = x + y + z;
+  print('addNumbers 함수의 결과는 $sum');
+}
+// 세 개의 숫자 (x, y, z)를 더하는 함수
+
+// positional parameter - 순서가 중요한 파라미터
+
+// optional parameter - 있어도 되고 없어도 되는 파라미터
+// parameter 선언할 때 [int y, int z]로 묶어 준다.
+// 기본값 안넣고 [int? y, int? z]로 하면 밑에 sum 쪽 계산에서 오류난다.
+// 따라서 기본값 넣어준다.
+
+// named parameter - 이름이 있는 파라미터 (순서가 중요하지 않다.)
+
+int addNumbers_named({
+  required int x,
+  required int y,
+  int z = 30 // named param에서 optional param 하는 방법.
+ }) {
+  int sum = x + y + z;
+  return sum;
+}
+
+int addNumbers_complex(int x, { // x : positional param
+  required int y, // y : named param
+  int z = 30 // z : named param 안에서 optional param 
+ }) {
+  int sum = x + y + z;
+  return sum;
+}
+
+  
+// Arrow 함수 : => 바로 다음 값이 return 됨.
+int addNumbers_complex_1(int x, { // x : positional param
+  required int y, // y : named param
+  int z = 30 // z : named param 안에서 optional param 
+ }) => x + y + z;
+  
+// typedef 함수  
+// 여기서 Function은 함수 이름이 아니다!
+//   signature
+typedef Operation = int Function(int x, int y);
+  
+int add(int x, int y) => x + y;
+int subtract(int x, int y) => x - y;
+ 
+int calculate(int x, int y, Operation operation){
+  return operation(x, y);
+}
+  
+  
+  

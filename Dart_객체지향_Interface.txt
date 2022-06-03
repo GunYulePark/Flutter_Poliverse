@@ -1,0 +1,30 @@
+void main(){
+  BoyGroup bts = BoyGroup('BTS');
+  
+  bts.sayName();
+  
+  print(bts is IdolInterface);
+  print(bts is BoyGroup);
+}
+
+// interface
+// 특정한 형식 강제
+// abstract : 인스턴스화 막기
+abstract class IdolInterface{
+  String name;
+  
+  IdolInterface(this.name);
+  
+  void sayName();
+  // {} 함수 body 지워도 된다.
+}
+
+class BoyGroup implements IdolInterface{
+  String name;
+  
+  BoyGroup(this.name);
+  
+  void sayName(){
+    print("제 이름은 $name입니다.");
+  }
+}

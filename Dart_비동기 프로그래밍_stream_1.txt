@@ -1,0 +1,26 @@
+import 'dart:async';
+
+void main(){
+  // stream 선언
+  final controller = StreamController();
+  final stream = controller.stream.asBroadcastStream();
+  // listen하고 있을 때 값 받는다.
+  // asBroadcastStream() : 여러번 listen 하고 싶을 때.
+  
+  // stream으로 변수 들어오는 순간 where로 screening
+  final streamListener1 = stream.where((val) => val %2 == 0)
+    .listen((val){
+    print('Listen 1 : $val');
+  });
+  
+  final streamListener2 = stream.where((val) => val %2 == 1)
+    .listen((val){
+    print('Listen 2 : $val');
+  });
+  
+  controller.sink.add(1);
+  controller.sink.add(2);
+  controller.sink.add(3);
+  controller.sink.add(4);
+  controller.sink.add(5);
+}
